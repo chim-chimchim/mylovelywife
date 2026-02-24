@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>いつも頑張ってる妻を笑顔にしよう💝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #06c755;
+      --green-d: #05a847;
+      --bg: #b8c8d4;
+      --surface: #fff;
+      --chat-bg: #d0dde5;
+      --text: #1a1a1a;
+      --sub: #666;
+      --border: #e0e0e0;
+      --red: #ff3b30;
+      --bubble-me: #06c755;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'M PLUS Rounded 1c', system-ui, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(6,199,85,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0,120,200,.06) 0%, transparent 50%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 10px 10px 60px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 13px 14px 11px;
+      margin-bottom: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 7px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10.5px;
+      background: #f2f2f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 100px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .badge.active {
+      background: #d4f7e0;
+      border-color: var(--green);
+      color: var(--green-d);
+    }
+
+    .support-pill {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 4px 11px;
+      border-radius: 100px;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: all .15s;
+    }
+    .support-pill:hover { border-color: var(--green); color: var(--green-d); }
+
+    .header-note {
+      font-size: 10px;
+      color: var(--sub);
+      margin-top: 5px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 12px 13px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--sub);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ── WIFE TYPE ── */
+    .type-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .type-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all .15s;
+      font-size: 13px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .type-label:has(input:checked) {
+      border-color: var(--green);
+      background: #f0fdf5;
+    }
+
+    .type-label input {
+      margin-top: 1px;
+      accent-color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .type-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .type-text { line-height: 1.35; }
+    .type-name { font-weight: 800; font-size: 13px; }
+    .type-desc { font-size: 11px; color: var(--sub); margin-top: 1px; }
+
+    /* ── MOOD ── */
+    .mood-btn {
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: 100px;
+      border: 2px solid var(--border);
+      background: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .mood-btn:hover { border-color: var(--green); }
+
+    .mood-result {
+      margin-top: 8px;
+      padding: 8px 11px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 500;
+      min-height: 30px;
+      background: #f5f5f7;
+      line-height: 1.4;
+    }
+    .mood-result.easy   { background: #d7f7ff; }
+    .mood-result.normal { background: #fff8dc; }
+    .mood-result.hard   { background: #ffe0e0; }
+
+    /* ── CHAT ── */
+    .chat-shell {
+      background: var(--surface);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      margin-bottom: 8px;
+    }
+
+    .chat-topbar {
+      background: #1a1a2e;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-topbar-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9fb3 0%, #ffccd5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      border: 2px solid rgba(255,255,255,.2);
+    }
+
+    .chat-topbar-info { flex: 1; }
+    .chat-topbar-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .chat-topbar-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,.5);
+      margin-top: 1px;
+    }
+
+    /* ターンインジケーター */
+    .turn-indicator {
+      font-size: 10px;
+      color: rgba(255,255,255,.6);
+      background: rgba(255,255,255,.1);
+      padding: 2px 8px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .chat-body {
+      background: var(--chat-bg);
+      padding: 10px 9px;
+      min-height: 260px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      scroll-behavior: smooth;
+    }
+
+    .msg {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      animation: msg-in .2s ease;
+    }
+    @keyframes msg-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.wife { justify-content: flex-start; }
+    .msg.me   { justify-content: flex-end; }
+
+    .msg-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9fb3, #ffccd5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255,255,255,.8);
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 8px 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .wife .bubble {
+      background: #fff;
+      color: #111;
+      border-radius: 14px 14px 14px 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+
+    .me .bubble {
+      background: var(--bubble-me);
+      color: #fff;
+      border-radius: 14px 14px 3px 14px;
+      box-shadow: 0 1px 3px rgba(6,199,85,.25);
+    }
+
+    /* システムメッセージ */
+    .sys-msg {
+      text-align: center;
+      font-size: 11px;
+      color: var(--sub);
+      background: rgba(255,255,255,.5);
+      border-radius: 100px;
+      padding: 3px 12px;
+      align-self: center;
+    }
+
+    /* タイピング */
+    .typing-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .typing-bubble {
+      background: #fff;
+      border-radius: 14px 14px 14px 3px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #bbb;
+      animation: bounce 1.1s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: .2s; }
+    .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce {
+      0%,60%,100% { transform: translateY(0); opacity:.35; }
+      30% { transform: translateY(-5px); opacity:1; }
+    }
+
+    /* スコアカード */
+    .score-card {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: #fff;
+      align-self: center;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+
+    .score-num {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .score-label { font-size: 12px; opacity: .7; margin-bottom: 4px; }
+
+    .rank-chip {
+      display: inline-block;
+      padding: 3px 14px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+    .rank-S { background: linear-gradient(90deg,#ffd700,#ffe87c); color: #333; }
+    .rank-A { background: linear-gradient(90deg,#c0c0c0,#e0e0e0); color: #333; }
+    .rank-B { background: linear-gradient(90deg,#cd7f32,#e09a52); color: #fff; }
+    .rank-C { background: linear-gradient(90deg,#ff3b30,#ff6b63); color: #fff; }
+
+    /* ── INPUT ── */
+    .input-bar {
+      display: flex;
+      gap: 7px;
+      padding: 8px 9px;
+      background: #eef2f5;
+      border-top: 1px solid #dce3e8;
+      align-items: flex-end;
+    }
+
+    .input-bar textarea {
+      flex: 1;
+      border: 1.5px solid #dce3e8;
+      border-radius: 20px;
+      padding: 8px 13px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      resize: none;
+      outline: none;
+      line-height: 1.45;
+      max-height: 90px;
+      background: #fff;
+      color: var(--text);
+      transition: border-color .15s;
+    }
+    .input-bar textarea:focus { border-color: var(--green); }
+    .input-bar textarea::placeholder { color: #bbb; }
+    .input-bar textarea:disabled { background: #f5f5f5; cursor: not-allowed; }
+
+    .send-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--green);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all .15s;
+      box-shadow: 0 2px 8px rgba(6,199,85,.35);
+    }
+    .send-btn:hover { background: var(--green-d); transform: scale(1.05); }
+    .send-btn:active { transform: scale(.93); }
+    .send-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; transform: none; }
+    .send-btn svg { width: 19px; height: 19px; fill: #fff; }
+
+    /* ── HINT ── */
+    .hint-bar {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--sub);
+      padding: 6px 10px;
+      background: #f8f8fa;
+      font-weight: 500;
+    }
+
+    /* ── GIFT SECTION ── */
+    .gift-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 13px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      display: none;
+    }
+
+    .gift-card.show { display: block; }
+
+    .gift-intro {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .gift-btn {
+      padding: 10px 8px;
+      border: 2px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      line-height: 1.3;
+      transition: all .15s;
+    }
+
+    .gift-btn:hover {
+      border-color: var(--green);
+      background: #f0fdf5;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(6,199,85,.15);
+    }
+
+    /* ── RESULT ACTIONS ── */
+    .result-actions {
+      display: none;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+    .result-actions.show { display: flex; }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 100px;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: all .15s;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-green { background: var(--green); color: #fff; box-shadow: 0 3px 10px rgba(6,199,85,.3); }
+    .btn-green:hover { background: var(--green-d); }
+    .btn-white { background: #fff; color: var(--text); border: 2px solid var(--border); }
+    .btn-white:hover { border-color: #bbb; }
+
+    /* ── OVERLAY ── */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.6);
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+      backdrop-filter: blur(3px);
+    }
+    .overlay.show { display: flex; }
+
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 18px;
+      max-width: 340px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      animation: modal-in .2s ease;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(20px) scale(.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .modal p  { font-size: 13px; color: #444; margin: 4px 0; line-height: 1.6; }
+    .modal-note { font-size: 10.5px; color: #999; margin-top: 6px !important; }
+
+    .modal-btns { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
+
+    .donation-list { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+
+    .donation-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: all .15s;
+      font-family: inherit;
+      background: #fff;
+    }
+    .donation-item:hover { border-color: var(--green); background: #f0fdf5; }
+    .donation-label { font-size: 13px; font-weight: 700; }
+    .donation-price { font-size: 14px; font-weight: 800; color: var(--green-d); }
+
+    /* エラー */
+    .error-msg {
+      background: #fff3f3; border: 1.5px solid #ffb3b3;
+      color: var(--red); border-radius: 8px;
+      padding: 7px 10px; font-size: 11.5px;
+      font-weight: 500; align-self: center;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">いつも頑張ってる妻を笑顔にしよう 💝</div>
+    <div class="status-row">
+      <span class="badge" id="playBadge">今日：-/-</span>
+      <span class="badge" id="passBadge">パス：なし</span>
+      <button class="support-pill" id="supportBtn">応援する 💐</button>
+    </div>
+    <div class="header-note">1日3回まで無料 ／ 100円で当日無制限（テスト実装）</div>
+  </div>
+
+  <!-- WIFE TYPE -->
+  <div class="card">
+    <div class="card-label">Step 1 ── 妻のタイプ</div>
+    <div class="type-options">
+      <label class="type-label">
+        <input type="radio" name="wt" value="celebrity">
+        <span class="type-icon">👸</span>
+        <span class="type-text">
+          <span class="type-name">セレブな専業主婦</span>
+          <span class="type-desc">小学生＋幼稚園児ママ。育ちが良く毒舌の才能あり。</span>
+        </span>
+      </label>
+      <label class="type-label">
+        <input type="radio" name="wt" value="career">
+        <span class="type-icon">💼</span>
+        <span class="type-text">
+          <span class="type-name">バリキャリワーママ</span>
+          <span class="type-desc">小学生2人ママ。論理的で効率重視、疲れると毒舌炸裂。</span>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <!-- MOOD -->
+  <div class="card">
+    <div class="card-label">Step 2 ── 今日の機嫌</div>
+    <button class="mood-btn" id="moodBtn">🎲 今日の機嫌をチェック</button>
+    <div class="mood-result" id="moodResult">チェックしていません</div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat-shell">
+    <div class="chat-topbar">
+      <div class="chat-topbar-avatar">💝</div>
+      <div class="chat-topbar-info">
+        <div class="chat-topbar-name" id="chatName">妻</div>
+        <div class="chat-topbar-sub" id="chatSub">タイプと機嫌を選んでスタート</div>
+      </div>
+      <div class="turn-indicator" id="turnIndicator">--</div>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="sys-msg">👆 妻のタイプと機嫌を選ぶと会話がはじまります</div>
+    </div>
+
+    <div class="input-bar">
+      <textarea id="msgInput" rows="1" placeholder="妻への一言を打とう…" disabled></textarea>
+      <button class="send-btn" id="sendBtn" disabled>
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="hint-bar" id="hintBar">妻のタイプと機嫌を選んでから会話しよう</div>
+  </div>
+
+  <!-- GIFT -->
+  <div class="gift-card" id="giftCard">
+    <div class="gift-intro">🎁 最後にプレゼントを渡そう</div>
+    <div class="gift-grid" id="giftGrid"></div>
+  </div>
+
+  <!-- RESULT ACTIONS -->
+  <div class="result-actions" id="resultActions">
+    <button class="btn btn-green" id="retryBtn">もう一度プレイ 🔁</button>
+    <button class="btn btn-white" id="shareBtn">Xで結果をシェア 🐦</button>
+  </div>
+
+</div><!-- /page -->
+
+<!-- LIMIT OVERLAY -->
+<div class="overlay" id="limitOverlay">
+  <div class="modal">
+    <h3>📵 本日の無料プレイ終了</h3>
+    <p>1日3回まで無料でプレイできます。</p>
+    <p><strong>100円</strong>で今日だけ無制限プレイを解放できます。</p>
+    <p class="modal-note">※本番ではStripe等の決済ページへ遷移します。現在はテストモードです。</p>
+    <div class="modal-btns">
+      <button class="btn btn-green" id="buyPassBtn">💳 100円で今日だけ無制限にする（テスト）</button>
+      <button class="btn btn-white" id="closeLimitBtn">今日はここまでにする</button>
+    </div>
+  </div>
+</div>
+
+<!-- DONATION OVERLAY -->
+<div class="overlay" id="donationOverlay">
+  <div class="modal">
+    <h3>💐 開発者を応援する</h3>
+    <p>「分かりみが深い」「世界の妻を笑顔にしてほしい」と思ったら、ぜひ応援してください。</p>
+    <p>投げ銭はゲーム結果には影響しない純粋な応援課金です。</p>
+    <div class="donation-list">
+      <button class="donation-item" data-amount="100">
+        <span class="donation-label">☕ ちょっと応援</span>
+        <span class="donation-price">100円</span>
+      </button>
+      <button class="donation-item" data-amount="300">
+        <span class="donation-label">🌸 全力応援</span>
+        <span class="donation-price">300円</span>
+      </button>
+      <button class="donation-item" data-amount="500">
+        <span class="donation-label">🏆 ガチ推し支援</span>
+        <span class="donation-price">500円</span>
+      </button>
+    </div>
+    <button class="btn btn-white" id="closeDonationBtn">閉じる</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════
+const FREE_LIMIT = 3;
+const MAX_TURNS   = 5;   // AIが終わらせなくてもこのターンで強制終了
+const MIN_TURNS   = 2;   // この回数以下では終了しない
+
+const STORAGE_KEY = 'tsuma_v3';
+const SUPPORT_KEY = 'tsuma_support_v3';
+
+const GIFTS = [
+  { key: 'haagen',       label: 'ハーゲンダッツ 🍨' },
+  { key: 'vancleef',     label: 'ヴァンクリネックレス 💎' },
+  { key: 'oven',         label: '高級オーブンレンジ 🍳' },
+  { key: 'freeWeekend',  label: '妻の自由な週末 🌿' },
+  { key: 'cash100k',     label: '現金10万円 💴' },
+  { key: 'camp',         label: '埼玉キャンプ ⛺' },
+  { key: 'hawaii',       label: 'ハワイ旅行 🌺' },
+];
+
+// ═══════════════════════════════════════════════════
+// localStorage
+// ═══════════════════════════════════════════════════
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function loadSave() {
+  let d;
+  try { d = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { d=null; }
+  if (!d || d.date !== today()) {
+    d = { date: today(), plays: 0, unlimited: false };
+    saveSave(d);
+  }
+  return d;
+}
+function saveSave(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+function canPlay() {
+  const d = loadSave();
+  return d.unlimited || d.plays < FREE_LIMIT;
+}
+function doPlay() {
+  const d = loadSave();
+  d.plays++;
+  saveSave(d);
+  refreshBadges();
+}
+function unlockPass() {
+  const d = loadSave();
+  d.unlimited = true;
+  saveSave(d);
+  refreshBadges();
+}
+
+function refreshBadges() {
+  const d = loadSave();
+  const pb = document.getElementById('playBadge');
+  const ps = document.getElementById('passBadge');
+  if (d.unlimited) {
+    pb.textContent = `今日：${d.plays}回（∞）`;
+    ps.textContent = 'パス：有効 ✅';
+    ps.classList.add('active');
+  } else {
+    pb.textContent = `今日：${d.plays}/${FREE_LIMIT}回`;
+    ps.textContent = 'パス：なし';
+    ps.classList.remove('active');
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+const G = {
+  wifeType: null,
+  mood: null,
+  turn: 0,
+  history: [],   // [{role,content}]
+  busy: false,
+  done: false,
+  lastScore: null,
+  lastRank: null,
+};
+
+// ═══════════════════════════════════════════════════
+// DOM refs
+// ═══════════════════════════════════════════════════
+const chatBody     = document.getElementById('chatBody');
+const msgInput     = document.getElementById('msgInput');
+const sendBtn      = document.getElementById('sendBtn');
+const hintBar      = document.getElementById('hintBar');
+const turnInd      = document.getElementById('turnIndicator');
+const giftCard     = document.getElementById('giftCard');
+const resultActs   = document.getElementById('resultActions');
+
+// ═══════════════════════════════════════════════════
+// UI helpers
+// ═══════════════════════════════════════════════════
+function scroll() { chatBody.scrollTop = chatBody.scrollHeight; }
+
+function addSys(text) {
+  const d = document.createElement('div');
+  d.className = 'sys-msg';
+  d.textContent = text;
+  chatBody.appendChild(d);
+  scroll();
+}
+
+function addBubble(who, text) {
+  const row = document.createElement('div');
+  row.className = `msg ${who}`;
+  if (who === 'wife') {
+    const av = document.createElement('div');
+    av.className = 'msg-avatar';
+    av.textContent = '妻';
+    row.appendChild(av);
+  }
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  b.textContent = text;
+  row.appendChild(b);
+  chatBody.appendChild(row);
+  scroll();
+}
+
+function addError(text) {
+  const d = document.createElement('div');
+  d.className = 'error-msg';
+  d.textContent = text;
+  chatBody.appendChild(d);
+  scroll();
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'typing-row';
+  row.id = 'typingRow';
+  const av = document.createElement('div');
+  av.className = 'msg-avatar';
+  av.textContent = '妻';
+  const bub = document.createElement('div');
+  bub.className = 'typing-bubble';
+  bub.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  row.appendChild(av);
+  row.appendChild(bub);
+  chatBody.appendChild(row);
+  scroll();
+}
+
+function hideTyping() {
+  const r = document.getElementById('typingRow');
+  if (r) r.remove();
+}
+
+function setInput(on) {
+  msgInput.disabled = !on;
+  sendBtn.disabled  = !on;
+  if (on) msgInput.focus();
+}
+
+function setHint(t) { hintBar.textContent = t; }
+function setTurnInd(t) { turnInd.textContent = t; }
+
+function addScoreCard(score, rank) {
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;justify-content:center;padding:4px 0';
+  const c = document.createElement('div');
+  c.className = 'score-card';
+  c.innerHTML = `
+    <div class="score-label">今回のスコア</div>
+    <div class="score-num">${score}</div>
+    <div style="font-size:11px;opacity:.6;margin-top:2px">/ 220点満点</div>
+    <div class="rank-chip rank-${rank}">${rank} ランク</div>
+  `;
+  row.appendChild(c);
+  chatBody.appendChild(row);
+  scroll();
+}
+
+function wifeLabel() {
+  return G.wifeType === 'celebrity'
+    ? 'セレブ専業主婦（小学生・幼稚園児ママ）'
+    : 'バリキャリワーママ（小学生2人）';
+}
+function moodLabel() {
+  return G.mood === 'easy' ? 'ご機嫌' : G.mood === 'normal' ? '普通' : '不機嫌';
+}
+
+// ═══════════════════════════════════════════════════
+// Anthropic API
+// ═══════════════════════════════════════════════════
+async function callAI(system, messages, maxTokens=900) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      system,
+      messages,
+    }),
+  });
+  if (!res.ok) throw new Error('API ' + res.status);
+  const j = await res.json();
+  return j.content.map(c => c.text||'').join('');
+}
+
+// ── 妻の返答プロンプト ──
+function wifeSystem() {
+  const moodMap = {
+    easy:   '今日は比較的機嫌が良い。子どもも比較的平和だったし、心に少し余裕がある。優しい言葉には素直に喜ぶ。',
+    normal: 'いつも通りの一日。疲れているが普通に話せる。地雷を踏まなければ会話は成立する。',
+    hard:   '今日は特にひどい一日だった。宿題・ゲンカ・プリント山・仕事のダブルブッキングなどフルコース。わずかな地雷でも敏感に反応する。',
+  };
+
+  const wifeProfile = G.wifeType === 'celebrity'
+    ? `専業主婦（小学生と幼稚園児の2人育て）。育ちが良く上品な物言いだが、本質を突く毒舌の才能がある。
+子どもの習い事・PTA・ママ友LINEなどをこなしながら夫の"感謝の薄さ"に日々モヤっている。`
+    : `フルタイム共働きのバリキャリママ（小学生2人）。仕事でも家でもマルチタスクをこなす。
+論理的・効率重視だが感情も豊か。疲弊すると正直すぎる毒舌が出る。`;
+
+  return `あなたは以下のキャラクターです。
+
+【プロフィール】
+${wifeProfile}
+
+【今日の機嫌】
+${moodMap[G.mood]}
+
+【会話ルール】
+- 話し方は自然な日本語口語。LINEメッセージのように短い段落で。
+- 夫の言葉の"本質"を見抜く。表面的な褒め言葉や、感情を無視した効率論には正直に反応する。
+- 誠実な共感・具体的な行動提案・ユーモアある言葉には素直に喜ぶ。
+- 地雷ワード：「みんなそうだよ」「俺も疲れてる（共感ゼロで最初に言う）」「愚痴ってても変わらない」「効率化しよう（寄り添いゼロ）」「ゲームしたい」「まだマシな方」など → 正直に不満・ダメ出しを返す。
+
+【出力形式 — 必ずこのJSON形式のみで返答してください。マークダウン・コードブロック禁止】
+{
+  "message": "妻のセリフ（自然な口語文、改行は\\nで）",
+  "readyForGift": true または false,
+  "endReason": "readyForGiftがtrueのときだけ：'good'（良い流れで終了）または 'bad'（地雷でショートカット終了）"
+}
+
+readyForGiftの判断基準：
+- 会話が${MIN_TURNS}ターン以上進んでいる
+- かつ：話が一段落した（良い方向でも悪い方向でも）
+- 地雷を踏んだ場合は${MIN_TURNS}ターン以上なら即終了してよい
+- まだ会話を続けたい場合はfalseを返す（最大${MAX_TURNS}ターンまで）`;
+}
+
+// ── スコア＆最終リアクション ──
+async function getResult(giftKey) {
+  const giftName = GIFTS.find(g=>g.key===giftKey)?.label || giftKey;
+  const conv = G.history.map(h=>`${h.role==='user'?'夫':'妻'}：${h.content}`).join('\n\n');
+
+  // スコア判定
+  const scoreSystem = `あなたは夫婦コミュニケーション評価AI。以下のJSONのみ返す（マークダウン禁止）：
+{"score":0,"rank":"S","shortComment":"15字以内のコメント"}
+
+評価基準（0〜220点）：
+- 妻タイプ：${wifeLabel()}
+- 機嫌：${moodLabel()}
+- ギフト：${giftName}
+スコアの方針：
+・誠実さ・共感・具体的な行動提案：各+20〜30
+・地雷ワード使用：各-20〜40
+・機嫌bad時のペナルティ：最大-25
+・ギフト相性（バリキャリワーママ×自由な週末は最高）：±20
+・ランク: 180以上=S, 130以上=A, 90以上=B, 未満=C`;
+
+  let score=100, rank='B', comment='';
+  try {
+    const raw = await callAI(scoreSystem, [{role:'user', content:`会話履歴:\n${conv}\nプレゼント:${giftName}`}], 200);
+    const p = JSON.parse(raw.replace(/```[a-z]*|```/g,'').trim());
+    score = Math.max(0, Math.min(220, p.score||100));
+    rank  = p.rank || 'B';
+    comment = p.shortComment || '';
+  } catch(e) { console.warn('score parse', e); }
+
+  // 最終リアクション
+  const reactionSystem = `あなたは${wifeLabel()}。今日の機嫌：${moodLabel()}。
+夫との会話の後、最後に「${giftName}」というプレゼントをもらった。
+全体評価は${rank}ランク（${score}点）。
+
+【${rank}ランクの描写方針】
+S: 感動・惚れ直し、少し照れを混じえてユーモラスに表現
+A: 良かったが「あと一歩」のフィードバック付き、前向きに締める
+B: 嬉しいけどBランク、「まあいいか…でも家計からヴァンクリ買うね」的な毒舌コメントを混ぜる
+C: 正直に不満爆発→その後Xの裏アカに投稿したら軽くバズった展開を織り込む（スクリーンショット風の引用コメントをいくつか）
+
+3〜5段落の自然な口語文。最後は「次はこうしてね」的な一言で締める。純粋な地の文のみ、箇条書き禁止。`;
+
+  const reaction = await callAI(reactionSystem, [{role:'user', content:`${rank}ランク（${score}点）の最終リアクションを返してください。プレゼントは「${giftName}」です。`}], 1000);
+  return { score, rank, comment, reaction };
+}
+
+// ═══════════════════════════════════════════════════
+// GAME FLOW
+// ═══════════════════════════════════════════════════
+function getOpening() {
+  const { wifeType, mood } = G;
+  const l = wifeLabel();
+  if (mood === 'easy') {
+    return wifeType === 'celebrity'
+      ? `${l}「おつかれさま〜。今日は子ども2人もわりと平和で、久しぶりに気持ちに余裕がある感じ。何かあった？」`
+      : `${l}「ただいま。今日は仕事も子どもも想定内の範囲で収まってて、ちょっとだけ人間に戻れてる。珍しい。」`;
+  }
+  if (mood === 'normal') {
+    return wifeType === 'celebrity'
+      ? `${l}「ふぅ…。今日も無事に2人寝かしつけた。毎日これか、ってなってるけど、まあ話くらいなら聞けるかな。」`
+      : `${l}「お疲れ。今日も小学生2人の宿題バトルと仕事の締め切りが重なって、まあいつも通りの感じで終わった。」`;
+  }
+  return wifeType === 'celebrity'
+    ? `${l}「ねえ、前から言おうと思ってたんだけど、麦茶のボトル、ちょっとだけ残して冷蔵庫に戻すの本当にやめてほしい。朝から小学生と幼稚園児の支度・習い事の送迎・宿題バトルして、その上であれ見るとHPごっそり持ってかれる。」`
+    : `${l}「あのさ、今日どれだけ大変だったか分かる？フルタイムで働きながら帰ってきて、小学生2人の宿題と音読とプリントの山さばいて、ごはん作って片付けて、PTAのライン処理して、やっと座れた。」`;
+}
+
+function startGame() {
+  G.turn = 0;
+  G.history = [];
+  G.done = false;
+  G.lastScore = null;
+  G.lastRank = null;
+
+  chatBody.innerHTML = '';
+  giftCard.classList.remove('show');
+  resultActs.classList.remove('show');
+
+  document.getElementById('chatName').textContent = wifeLabel();
+  document.getElementById('chatSub').textContent  = moodLabel() + 'モード';
+
+  const opening = getOpening();
+  addBubble('wife', opening);
+  G.history.push({ role: 'assistant', content: opening });
+
+  setTurnInd(`ターン 0/${MAX_TURNS}`);
+  setInput(true);
+  setHint('自由に一言打ってみよう（Enterで送信）');
+}
+
+async function handleSend() {
+  if (G.busy || G.done) return;
+  const text = msgInput.value.trim();
+  if (!text) return;
+
+  if (!canPlay() && G.turn === 0) {
+    document.getElementById('limitOverlay').classList.add('show');
+    return;
+  }
+
+  msgInput.value = '';
+  msgInput.style.height = '';
+  setInput(false);
+  G.busy = true;
+
+  G.turn++;
+  setTurnInd(`ターン ${G.turn}/${MAX_TURNS}`);
+
+  addBubble('me', text);
+  G.history.push({ role: 'user', content: text });
+
+  showTyping();
+
+  try {
+    const raw = await callAI(wifeSystem(), G.history);
+    hideTyping();
+
+    // JSONパース
+    let parsed;
+    try {
+      parsed = JSON.parse(raw.replace(/```[a-z]*|```/g,'').trim());
+    } catch(e) {
+      // JSONパース失敗時はそのまま文字列として扱う
+      parsed = { message: raw, readyForGift: false };
+    }
+
+    const wMsg = parsed.message || raw;
+    addBubble('wife', wMsg);
+    G.history.push({ role: 'assistant', content: wMsg });
+
+    const forceEnd = G.turn >= MAX_TURNS;
+    const aiEnd    = parsed.readyForGift === true && G.turn >= MIN_TURNS;
+
+    if (forceEnd || aiEnd) {
+      // プレゼントフェーズへ
+      setTimeout(showGiftPhase, 400);
+    } else {
+      setInput(true);
+      setHint(`ターン ${G.turn}/${MAX_TURNS} ── 続けて話しかけよう（あと${MAX_TURNS - G.turn}回まで）`);
+    }
+  } catch(e) {
+    hideTyping();
+    addError('AIとの通信に失敗しました。少し待ってから再試行してください。');
+    setInput(true);
+  }
+
+  G.busy = false;
+}
+
+function showGiftPhase() {
+  addSys('── 話に区切りがついた。プレゼントを渡そう 🎁 ──');
+  setInput(false);
+  setHint('プレゼントを選んで渡そう');
+  setTurnInd('プレゼントへ');
+
+  const grid = document.getElementById('giftGrid');
+  grid.innerHTML = '';
+  GIFTS.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'gift-btn';
+    btn.textContent = g.label;
+    btn.onclick = () => handleGift(g.key);
+    grid.appendChild(btn);
+  });
+
+  giftCard.classList.add('show');
+  giftCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function handleGift(giftKey) {
+  if (G.busy) return;
+  G.busy = true;
+  G.done = true;
+
+  const giftName = GIFTS.find(g=>g.key===giftKey)?.label || giftKey;
+  giftCard.classList.remove('show');
+
+  addBubble('me', `「実は…${giftName}を用意してきたんだ。」`);
+  addSys('── 採点中… ──');
+  showTyping();
+
+  try {
+    const { score, rank, comment, reaction } = await getResult(giftKey);
+    hideTyping();
+
+    addScoreCard(score, rank);
+    addBubble('wife', reaction);
+
+    G.lastScore = score;
+    G.lastRank  = rank;
+
+    doPlay();
+
+    setHint(`${rank}ランク ${score}点！ もう一度で別ルートを探そう`);
+    setTurnInd('終了');
+
+    document.getElementById('shareBtn').onclick = () => {
+      const t = `「いつも頑張ってる妻を笑顔にしよう💝」で${wifeLabel()}に${score}点（${rank}ランク）出ました！ #妻を笑顔にしようゲーム`;
+      window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(t)}&url=${encodeURIComponent(location.href)}`,'_blank');
+    };
+
+    resultActs.classList.add('show');
+    chatBody.scrollTop = chatBody.scrollHeight;
+  } catch(e) {
+    hideTyping();
+    addError('採点中にエラーが発生しました。');
+  }
+
+  G.busy = false;
+}
+
+// ═══════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════
+function tryStart() {
+  if (!G.wifeType) { setHint('妻のタイプを選んでね'); return; }
+  if (!G.mood)     { setHint('機嫌をチェックしてね'); return; }
+  if (!canPlay())  { document.getElementById('limitOverlay').classList.add('show'); return; }
+  startGame();
+}
+
+// ═══════════════════════════════════════════════════
+// EVENT LISTENERS
+// ═══════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  refreshBadges();
+
+  // タイプ選択
+  document.querySelectorAll('input[name="wt"]').forEach(r => {
+    r.addEventListener('change', () => {
+      G.wifeType = r.value;
+      tryStart();
+    });
+  });
+
+  // 機嫌チェック
+  document.getElementById('moodBtn').addEventListener('click', () => {
+    const r = Math.random();
+    G.mood = r < .4 ? 'easy' : r < .8 ? 'normal' : 'hard';
+    const box = document.getElementById('moodResult');
+    box.className = 'mood-result ' + G.mood;
+    box.textContent = G.mood === 'easy'
+      ? '🌈 ご機嫌（EASY） ── 子どもも平和。会話しやすい日。'
+      : G.mood === 'normal'
+      ? '🙂 普通（NORMAL） ── いつものカオスな一日。'
+      : '😠 不機嫌（HARD） ── 宿題・ゲンカ・プリント山の日。地雷に注意！';
+    tryStart();
+  });
+
+  // 送信
+  sendBtn.addEventListener('click', handleSend);
+  msgInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
+  msgInput.addEventListener('input', () => {
+    msgInput.style.height = 'auto';
+    msgInput.style.height = Math.min(msgInput.scrollHeight, 90) + 'px';
+  });
+
+  // リトライ
+  document.getElementById('retryBtn').addEventListener('click', () => {
+    if (!canPlay()) { document.getElementById('limitOverlay').classList.add('show'); return; }
+    G.mood = null;
+    G.wifeType = null;
+    document.querySelectorAll('input[name="wt"]').forEach(r => r.checked = false);
+    const mr = document.getElementById('moodResult');
+    mr.className = 'mood-result';
+    mr.textContent = 'チェックしていません';
+    chatBody.innerHTML = '<div class="sys-msg">👆 妻のタイプと機嫌を選ぶと会話がはじまります</div>';
+    giftCard.classList.remove('show');
+    resultActs.classList.remove('show');
+    setInput(false);
+    setHint('妻のタイプと機嫌を選んでから会話しよう');
+    setTurnInd('--');
+    document.getElementById('chatName').textContent = '妻';
+    document.getElementById('chatSub').textContent = 'タイプと機嫌を選んでスタート';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 制限モーダル
+  document.getElementById('buyPassBtn').addEventListener('click', () => {
+    if (!confirm('【テスト】100円で本日の無制限パスを購入したとみなします。\n決済完了とみなしてよろしいですか？')) return;
+    unlockPass();
+    alert('今日はプレイし放題になりました！🎉');
+    document.getElementById('limitOverlay').classList.remove('show');
+    if (G.wifeType && G.mood) startGame();
+  });
+  document.getElementById('closeLimitBtn').addEventListener('click', () => {
+    document.getElementById('limitOverlay').classList.remove('show');
+  });
+
+  // 投げ銭
+  document.getElementById('supportBtn').addEventListener('click', () => {
+    document.getElementById('donationOverlay').classList.add('show');
+  });
+  document.getElementById('closeDonationBtn').addEventListener('click', () => {
+    document.getElementById('donationOverlay').classList.remove('show');
+  });
+  document.querySelectorAll('.donation-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const amt = Number(btn.dataset.amount);
+      if (!confirm(`【テスト】${amt}円の応援投げ銭をしたとみなします。\n決済完了とみなしてよろしいですか？`)) return;
+      let log;
+      try { log = JSON.parse(localStorage.getItem(SUPPORT_KEY))||[]; } catch(e) { log=[]; }
+      log.push({ date: today(), amount: amt });
+      localStorage.setItem(SUPPORT_KEY, JSON.stringify(log));
+      alert(`ありがとうございます！${amt}円の応援を受け取りました🥰`);
+      document.getElementById('donationOverlay').classList.remove('show');
+    });
+  });
+});
+</script>
+</body>
+</html>
